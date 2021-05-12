@@ -1,5 +1,6 @@
 /*
     Name - Navneet
+    Registration number - 20194026
     Group - B2
 */
 //c program for linked list creation, insertion and deletion
