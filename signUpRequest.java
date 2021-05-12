@@ -1,10 +1,10 @@
 package Client;
 
+import Server.mySqlConnection;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
@@ -17,8 +17,7 @@ public class signUpRequest {
     boolean flag = false;
     public signUpRequest(String name, String password) {
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/databaseinventory", "root", "password");
+            con = mySqlConnection.getConnection();
             
             String syntax = "SELECT * FROM userinfo WHERE userName = ?";
             pst = (PreparedStatement) con.prepareStatement(syntax);
@@ -36,7 +35,7 @@ public class signUpRequest {
                 new signUpConfirmed(name, password);
             }
             
-        } catch (ClassNotFoundException | SQLException ex) {
+        } catch (SQLException ex) {
             Logger.getLogger(signUpRequest.class.getName()).log(Level.SEVERE, null, ex);
         }  
     } 

@@ -2,11 +2,22 @@ package Client;
 
 
 public class LoginSwingUI extends javax.swing.JFrame {
-
+    private static String userName;
+    private static String password;
     public LoginSwingUI() {
         initComponents();
     }
-
+    public String getUserName() {
+        return userName;
+    }
+    private void setter() {
+        userNameText.setText("");
+        passwordField.setText("");
+    }
+    private void initialize() {
+        userName = userNameText.getText();
+        password = passwordField.getText();
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -88,24 +99,19 @@ public class LoginSwingUI extends javax.swing.JFrame {
 
     private void signInButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signInButtonActionPerformed
 
-        String name = userNameText.getText();
-        String password = passwordField.getText();
-        signIn obj = new signIn(name, password);
+        initialize();
+        signIn obj = new signIn(userName, password);
         if(obj.getMessage()) {
-            userNameText.setText("");
-            passwordField.setText("");
+            setter();
         }
     }//GEN-LAST:event_signInButtonActionPerformed
 
     private void signUpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signUpButtonActionPerformed
-        
-        String name = userNameText.getText();
-        String password = passwordField.getText();
-        signUpRequest obj = new signUpRequest(name, password);
-        
+ 
+        initialize();
+        signUpRequest obj = new signUpRequest(userName, password);        
         if(obj.getMessage()) {
-            userNameText.setText("");
-            passwordField.setText("");
+            setter();
         }
     }//GEN-LAST:event_signUpButtonActionPerformed
 

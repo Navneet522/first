@@ -1,8 +1,9 @@
 package Client;
 
+import Server.GUI.brandSwingUI;
+import Server.mySqlConnection;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -17,8 +18,7 @@ public class signIn {
     boolean flag = false;
     public signIn(String name, String password) {
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/databaseinventory", "root", "password");
+            con = mySqlConnection.getConnection();
             
             String sytax = "SELECT * FROM userinfo WHERE userName = ? and password = ?";
             pst = (PreparedStatement) con.prepareStatement(sytax);
@@ -28,6 +28,10 @@ public class signIn {
             
             if(rs.next()) {
                 JOptionPane.showMessageDialog(null, "Succussfull logged in");
+                brandSwingUI ui = new brandSwingUI();
+                ui.hide();
+                ui.setVisible(true);
+                System.out.println("Called the brandSwingUI");
             }
             else {
                 String warning = "Either User Name or Password is wrong";
@@ -35,7 +39,7 @@ public class signIn {
                 flag = true;
             }
             
-        } catch (ClassNotFoundException | SQLException ex) {
+        } catch (SQLException ex) {
             Logger.getLogger(signIn.class.getName()).log(Level.SEVERE, null, ex);
         }     
     }

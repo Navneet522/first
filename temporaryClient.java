@@ -9,7 +9,7 @@ import java.util.logging.Logger;
 
 
 public class temporaryClient {
-    public static void main(String[] args) {
+    public static void main(String args[]) {
         try {
             InetAddress ip = InetAddress.getByName("localhost");
             Socket socket = new Socket(ip, 888);
